@@ -1,0 +1,23 @@
+.profil ul li{
+    text-decoration: none;
+    list-style: none;
+  }
+  .profil a{
+    text-decoration: none;
+    color: #2D3645;
+    font-size: 12px;
+    font-weight:600;
+  
+  }
+  .profil{
+    border-left: 1px solid#E5E5E5;
+  }
+  
+  .user{
+    width: 46px;
+    display: inline-block;
+  }
+  .bg{
+    background-color: #fff !important;
+    margin:-1% ;
+  }

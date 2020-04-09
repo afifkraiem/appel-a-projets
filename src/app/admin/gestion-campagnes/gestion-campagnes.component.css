@@ -1,0 +1,10 @@
+.viewcamp:hover{
+    font-weight: bolder;
+    cursor: pointer;
+    background-color:#DEE4E6;
+    border-left: 5px solid #A70A2D;
+    border-right: 4px solid #A70A2D;
+}
+
+
+

@@ -1,0 +1,114 @@
+
+<br> <br>
+  <div class="box">
+<br><br>
+    <h3>Liste de campagnes</h3><br>
+    
+    <div class="row ">
+      <div class="pull-right">
+        <button class=" btn btn1" data-toggle="modal" data-target="#createModal" [disabled]="!isActive"> <i class="fa fa-plus-square" ></i> &nbsp; Ajouter une campagne</button>
+       
+        <!--Modal pour le formulaire de création d'une nouvelle campagne-->
+
+        <div class="modal fade" id="createModal" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Ajouter une campagne</h4>
+        
+            </div>
+            <div class="modal-body">
+              <form [formGroup]= "form">
+                <label for="titre">Campagne</label>
+                <input type="text" class="form-control" placeholder="Choisir un titre pour la campagne" formControlName="nomcomp">
+                  <label for="titre">Date de début</label>
+                  <input type="date" class="form-control" placeholder="Choisir la date de début de la campagne " formControlName="date_debut">
+                  <label for="titre">Date de clôture</label>
+                  <input type="date" class="form-control" placeholder="Choisir la date de clôture de la campagne " formControlName="date_cloture">
+                  <br>
+                  <br>
+              
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)= envoyer(form)>Enregistrer</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        
+            </div>
+        
+          </div>
+        
+        </div>
+        </div>
+    </div>
+  </div>
+<br>
+<br>
+
+<!-- table d'affichage de campagnes-->
+
+<div class="row ">
+<div class="table-responsive">
+    <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered">
+      <thead>
+              <tr>
+                  <th>index</th>
+                  <th>Camagne</th>
+                  <th>Date début </th>
+                  <th>Date clôture </th>
+                  <th>Etat</th>
+                  <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of camp; let i=index"  class="viewcamp" (click)=getCneufByCamp(c.id,c.nomcomp) title="cliquez pour afficher les candidatures relatives à cette campagne ">
+                  <td>{{i+1}}</td>
+                  <td>{{c.nomcomp}} </td>
+                  <td >{{c.date_debut}}</td>
+                  <td>{{c.date_cloture}}</td>
+                  <td>{{c.etat}}</td>
+                  <td class="text-center"><button type= "Primary" class= "btn btn-danger" (click)= Cloture(c.id) [disabled]="c.etat=='cloturé'" > <i class="fas fa-ban"></i> Clôturer</button></td></tr>
+                </tbody>
+                </table>
+          </div>
+        </div>
+        <br><br>
+
+        <!-- section pour affichage liste de candidatures pour la campagne selectionnée -->
+        
+        <div class="row " [hidden]="!selectedCamp">
+          <h4>Liste de candidatures sous la campagne <strong>{{nomSelectedCamp}}</strong></h4>
+
+          <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                        <tr>
+                            <th>Nom du projet</th>
+                            <th>Nom du porteur du projet </th>
+                            <th>Direction regionale</th>
+                            <th>Etat</th>
+          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let cand of candidatures; " >
+                            <td>{{cand.nom_projet}} </td>
+                            <td >{{cand.nom_porteur_projet}}</td>
+                            <td>{{cand.direction_reg}}</td>
+                            <td class="text-center " *ngIf= " cand.statut == 0"><i title="Brouillon" class="fas fa-edit" style="color:#702381;"></i> En brouillon</td>
+                            <td class="text-center " *ngIf= " cand.statut == 1"><i title="Attente de consolidation" class="fas fa-clock fa-lg" style="color:orange;"></i>&nbsp; En attente de consolidation</td>
+                            <td class="text-center " *ngIf= " cand.statut == 2"><i title="Consolidé et en attente d'expert" class="fas fa-user-clock fa-lg" style="color:green;"></i>&nbsp; Consolidé et en attente d'expert </td>
+                            <td class="text-center " *ngIf= " cand.statut == 3"><i title="Consolidé et assigner à un expert" class="fas fa-user fa-lg" style="color:green;"></i>&nbsp; Consolidé et assigné à un expert</td>
+                            <td class="text-center " *ngIf= " cand.statut == 4"><i title="Valideé" class="fas fa-check-circle " style="color:green;"></i>&nbsp; Valideé</td>
+                            <td class="text-center " *ngIf= " cand.statut == 5"><i title="Rejeté" class="fas fa-times-circle" style="color:red;"></i>&nbsp; Rejeté</td>                         
+                           </tbody>
+                          </table>
+                    </div>
+                  </div>
+    </div>
+
+    

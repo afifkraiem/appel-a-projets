@@ -1,0 +1,26 @@
+<br> <br>
+<div class="box">
+        <br><br>
+        <h3>Rapports de suivi des projets</h3><br>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-2"  *ngFor="let c of cneufs;">
+        <img src="./assets/img/37044.png" style="height:100px; width:100px "  (click) = OnSelect(c) [class.selected]="c == selectedCneuf"><br>
+          {{c.name}}
+        
+      </div>
+      
+    </div>
+    
+</div >
+</div>
+<br><br><br>
+<div class="box" *ngIf="selectedCneuf">
+        <h3>liste de rapports de suivi du projet {{selectedCneuf.name}}:</h3> <br>
+        <ul *ngFor="let r of selectedCneuf.Rapports;">
+            <li>{{r}}</li><i class="fas fa-file-download"></i>
+        </ul>
+</div>

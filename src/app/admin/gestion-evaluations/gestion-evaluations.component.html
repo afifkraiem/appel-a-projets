@@ -1,0 +1,110 @@
+
+<div class="col-md-12">
+  <br><br>
+  <div class="box">
+
+  
+<br>
+<br>
+
+ <form>
+  <div class="form-group">
+        <h3>Liste des évaluations </h3>
+          <label for="">Choisir une Campagne</label><br>
+          <ng-select class="custom" [multiple]="true" (change)='onSelect($event)' [searchable]= "true" (clear)= 'getAllCands()'>
+                <ng-option *ngFor="let camp of Campagnes" [value]="camp.id" >{{camp.nomcomp}}</ng-option>
+         </ng-select>
+         
+  </div>
+</form>
+<br>
+<br><br>
+
+<br> <br>
+    <div class="row ">
+        <div class="table-responsive" >
+            <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered">
+              <thead>
+              <tr>
+                  <th>Intitulé du projet</th>
+                  <th>Nom du porteur du projet</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="non-vu" *ngFor= " let cand of candidatures   ; let i = index ">
+                  <td>{{cand.nom_projet}}</td>
+                  <td > {{cand.nom_porteur_projet}}</td>
+
+
+                  <td><button class=" btn btn1fin" data-toggle="modal" data-target="#EvaluationModal" (click)= getEvals(cand.id) > Afficher Evaluation </button>
+                    
+                  </td>
+                  
+                  <!--Afficher evaluations-->
+                  <div class="modal fade" id="EvaluationModal" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg"  role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Evaluations</h4>
+
+                          </div>
+                          <div class="modal-body" >
+                              <div class="">
+                                  <div class="table-responsive">
+                                      <table class="table table-bordered">
+                                        <tr>
+                                            <th>Nom de l'expert</th>
+                                            <th>Objectifs du projet </th>
+                                            <th>Cadre logique </th>
+                                            <th>Description détaillée </th>
+                                            <th>Stratégie communication</th>
+                                            <th>Gouvernance du projet</th>
+                                            <th>Évaluation du projet</th>
+                                            <th>Éléments financiers</th>
+                                            <th>Commentaire </th>
+                                        </tr>
+                                        <tr *ngFor=" let eval of evals">
+                                          <td> <div *ngFor="let user of users; "><div *ngIf="eval.idExpert == user.id">{{user.name}}</div></div></td>
+                                          <td> {{eval.n1}} </td>
+                                          <td> {{eval.n2}} </td>
+                                          <td> {{eval.n3}} </td>
+                                          <td> {{eval.n4}} </td>
+                                          <td> {{eval.n5}} </td>
+                                          <td> {{eval.n6}} </td>
+                                          <td> {{eval.n7}} </td>
+                                          <td> {{eval.commentaire}} </td>
+                                        </tr>
+                                        </table>
+                                  </div>
+
+                              </div>
+                                </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success"  data-dismiss="modal" (click)= valider() ><i class="fas fa-check-circle "></i> Valider</button>
+                            <button type="button" class="btn btn-danger"  data-dismiss="modal" (click)= Rejeter() ><i class="fas fa-times-circle" ></i> Rejeter</button>
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                      </div>
+                </tr>
+              </tbody>
+
+             </table>
+
+             </div>
+
+    </div>
+
+  </div>
+</div>
+

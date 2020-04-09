@@ -1,0 +1,52 @@
+
+<app-header></app-header>
+<div class="homeHeader">
+  <div class="container">
+    <h2>Plateforme de soumission de nouveaux projets  AUF</h2>
+  </div>
+</div>
+<img src="../assets/img/sigle_auf.png" class="img-responsive sigle pull-right">
+<div class="container bodyuser">
+<div class="col-md-8" style=" text-align:justify;">
+    <h1> {{act.titre}} </h1><br>
+    <div class="cont">
+    <a data-toggle="modal" data-target="#myModal6"> <img src="{{act.image}}" class="img-responsive hovereffect"> 
+     <div class="overlay">
+      <div class="text"><i class="fas fa-search fa-2x"></i></div>
+    </div>
+    </a>
+    </div>
+    <!--Modal-->
+<div class="modal fade" id="myModal6" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="{{act.image}}" class="img-responsive">
+      </div>
+
+    </div>
+  </div>
+ </div>
+ <br>
+    <div *ngFor="let cneuf of act.cneufs;">
+        <i class="description">{{act.date_soum}}, {{cneuf.nom_projet}} </i><br><br>
+    </div>
+    <p> <b> {{act.intro}} </b></p>
+    <br>
+    <div style="font-size:15px; " *ngFor="let t of text;" ><p [innerHTML]="t"></p></div><br>
+
+
+</div>
+
+<div class=" sidebar col-md-4">
+ <p><b>DATE DE PUBLICATION :</b> 21/08/2019</p>
+    <p *ngFor="let cneuf of act.cneufs;"><b style="text-transform: uppercase;">publié par :</b> {{cneuf.nom_projet}}  </p>
+ <button type="button" class="btn btn11" (click) = navigate()> RETOUR à LA LISTE <br> DES ACTUALITéS </button>
+</div>
+</div>
+
+
+

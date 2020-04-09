@@ -1,0 +1,197 @@
+<div class="col-md-12">
+  <br><br>
+  <div class="box">
+
+      <br><br>
+      <h3>Liste des actualités</h3>
+      <br>
+    <div class="col-md-11">
+        <ng-select class="custom" [multiple]="false" (change)='showActs($event)' [searchable]= "true"   placeholder="Sélectionner un projet "  >
+          <ng-option *ngFor="let cand of cands" [value]="cand.id" >{{cand.nom_projet}}</ng-option>
+   </ng-select>
+      </div>
+
+<br>
+<br>
+    <div class="row ">
+      
+
+
+        <div class="col-md-12">
+            <br><br>
+              <h4>Liste des actualités</h4>
+
+              <div class="row ">
+                <div class="pull-right">
+                <button class="btn btn1" data-toggle="modal" data-target="#createModal">Ajouter une actualité</button>
+                <!--Modal pour formulaire d'ajout d'une nouvelle actualité-->
+                <div class="modal fade" id="createModal" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel">Ajouter une actualité </h4>
+                    
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]= "form">
+                                <label for="titre">Catégorie</label>
+                                <input type="text" class="form-control" placeholder="Choisir une catégorie pour l'article" formControlName="cathegory">
+                                  <label for="titre">Titre</label>
+                                  <input type="text" class="form-control" placeholder="Choisir un titre pour l'article" formControlName="titre">
+                                  <label for="titre">Introduction</label>
+                                  <input type="text" class="form-control" placeholder="Créer une petite introduction" formControlName="intro">
+                                  <label for= "image">Image de couverture</label>
+                                  <input type="file" class="form-control" (change)= upImage($event) #image>
+                                  <label for="texte">Corps de l'article</label>
+                                  <ckeditor [editor]="Editor" formControlName="discription" ></ckeditor><br>
+ 
+                            
+                                          <ng-select [items]="cands"
+                                                            bindLabel="nom_projet"
+                                                            formControlName="cneufs"
+                                                            [bindValue]="'id'"
+                                                            placeholder="Sélectionner un projet"
+                                                            [multiple]="true"
+                                                            >
+                                         </ng-select>
+                            
+                            </form>
+                            
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" (click)=envoyer(form) data-dismiss="modal">Envoyer</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    
+                        </div>
+                    
+                      </div>
+                    
+                    </div>
+                    </div>
+              </div>
+            </div>
+          <br>
+          <br>
+          <!--table pour affichage des actualités-->
+              <div class="row ">
+                  <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Catégorie</th>
+                            <th>Titre</th>
+                            <th>Introduction</th>
+                            <th>Détails</th>
+                            <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let act of acts; let i = index ">
+                            <td>{{act.cathegory}}</td>
+                            <td>{{act.titre}}</td>
+                            <td>{{act.intro}}</td>
+                            <td class="text-center"><a data-toggle="modal" data-target="#showActModal" (click)= getSelectedAct(act.id) ><i class="fas fa-eye"></i> Visualiser </a></td>
+                            <td class="text-center"><button type= "button" class= "btn btn-warning" data-toggle="modal" data-target="#editActModal" (click)= getAct(act.id)   > <i class="fas fa-edit"></i> Modifier</button>&nbsp;&nbsp;  <button type= "Primary" class= "btn btn-danger" (click)= deleteAct(act.id,i)  > <i class="far fa-trash-alt"> </i> Supprimer</button></td>
+                          </tr>
+                        </tbody>
+                       </table>
+                       </div>
+              </div>
+
+          </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+<!--Modal pour afficher une actualité-->
+
+<div class="modal fade" id="showActModal" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" #showActModal>
+    <div class="modal-dialog " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Ajouter une actualité </h4>
+    
+        </div>
+        <div class="modal-body">
+            <p><b>Catégorie:</b></p> {{selectedAct.cathegory}}
+            <br><br>
+
+            <p><b>titre:</b></p> {{selectedAct.titre}}
+            <br><br>
+
+            <p><b>Introduction:</b></p> {{selectedAct.intro}}
+            <br><br>
+            <img src="{{selectedAct.image}}"  style='max-width: 500px'>
+            <br><br>
+
+            <p><b>Description:</b></p> <p [innerHTML]="selectedAct.discription"></p>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+    
+        </div>
+    
+      </div>
+    
+    </div>
+    </div>
+
+    <!--Modal pour modifier une actualité-->
+
+    <div class="modal fade" id="editActModal" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Ajouter une actualité </h4>
+        
+            </div>
+            <div class="modal-body">
+                <form [formGroup]= "form">
+                    <label for="titre">Catégorie</label>
+                    <input type="text" class="form-control" placeholder="Choisir un titre pour l'article" formControlName="cathegory">
+                      <label for="titre">Titre</label>
+                      <input type="text" class="form-control" placeholder="Choisir un titre pour l'article" formControlName="titre">
+                      <label for="titre">Introduction</label>
+                      <input type="text" class="form-control" placeholder="Créer une petite introduction" formControlName="intro">
+                      <label for= "image">Image de couverture</label>
+                      <input type="file" class="form-control" (change)= upImage($event) #image>
+                      <label for="texte">Corps de l'article</label>
+                      <ckeditor [editor]="Editor" formControlName="discription" ></ckeditor><br>
+
+                
+                              <ng-select [items]="cands"
+                                                bindLabel="nom_projet"
+                                                formControlName="cneufs"
+                                                [bindValue]="'id'"
+                                                placeholder="Sélectionner un projet"
+                                                [multiple]="true"
+                                                >
+                             </ng-select>
+                
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)=updateAct(form) data-dismiss="modal">Envoyer</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        
+            </div>
+        
+          </div>
+        
+        </div>
+        </div>

@@ -1,0 +1,449 @@
+
+<app-header></app-header>
+<div class="col-md-12" id="ElementId">
+
+    
+    <div class="box">
+        <div class="row print">
+            <br> <br>
+            <button (click)=print() type="submit" class="btn btn1 pull-right"><i class="fas fa-print"> </i> Imprimer</button>
+            <button (click)=goBack() type="submit" class="btn btn1 "><i class="fas fa-arrow-circle-left"> </i> Retour</button>
+        </div>
+
+        <div class="box-title" id="box-title" >
+
+            <h3 class="">Informations projet</h3>
+            <hr>
+        </div>
+    <p> <b>Intitulé du projet projet : </b>{{cand.nom_projet}}</p>
+    <p> <b>Sigle/Nom court: </b>{{cand.presentation}}</p>
+    <p> <b>Nom du porteur du projet : </b>{{cand.nom_porteur_projet}}</p>
+    <p> <b>Email du porteur du projet : </b>{{emailPorteur}}</p>
+    <p> <b>Direction régionale de rattachement : </b>{{cand.direction_reg}}</p>
+    <p> <b>Date de mise en route prévue : </b>{{cand.date_debut}}</p>
+    <p> <b>Durée prévue du projet : </b>{{cand.duree}}</p>
+    <p> <b>Montant global du projet sur toute sa durée en euros : </b>{{cand.montant_global}} {{cand.deviseg}}</p>
+    <p> <b>Montant demandé à l'AUF en euros sur toute sa durée : </b>{{cand.montant_auf}} {{cand.devisea}}</p>
+
+    <div class="box-title" id="box-title">
+        <hr>
+        <h3 class="">Contexte et justification du projet</h3>
+        <hr>
+    </div>
+
+    <div> <b>Liste de partenaires: </b><br><br><p *ngFor="let p of cand.l_part|splitter ">{{p}}</p></div><br>
+    <div> <b>Objectifs : </b><br><br><p *ngFor="let o of cand.objectif|splitter">{{o}}</p></div><br>
+    <div class="print"> <b>Cadre logique : </b> <p *ngIf="(cand.cadre_logic == '' || cand.cadre_logic == null); else cadBlock">Aucun fichier n'est encore ajouté </p><ng-template #cadBlock><a  (click)= DownloadFile(cand.cadre_logic)    > <i class="fas fa-download"></i> Cadre logique du projet {{cand.nom_projet}} </a></ng-template> </div> <br>
+    <p > <b>Localisation des infrastructures mobilisées pour le projet : </b>{{cand.localisation}}</p>
+    <div class="print"> <b>Les plans : </b> <p *ngIf="(cand.plan_amenagement == '' || cand.plan_amenagement == null); else planBlock">Aucun fichier n'est encore ajouté </p> <ng-template #planBlock><a (click)= DownloadFile(cand.plan_amenagement)   > <i class="fas fa-download"></i> Plan d'amenagement du projet {{cand.nom_projet}} </a></ng-template></div>
+    <p> <b>Besoins en matière de structure : </b>{{cand.besoin}}</p>
+    <div> <b>Stratégie de communication : </b><br><br><p *ngFor="let c of cand.stratg_comm|splitter;">{{c}}</p></div><br>
+
+    <div class="print"> <b>Document de stratégie de communication : </b> <p *ngIf="(cand.file_com == '' || cand.file_com == null); else comBlock">Aucun fichier n'est encore ajouté </p> <ng-template #comBlock><a (click)= DownloadFile(cand.file_com)    > <i class="fas fa-download"></i> Stratégie de communication du projet {{cand.nom_projet}} </a></ng-template></div>
+
+    <div> <b>Stratégie de pérrennisation : </b><br><br><p *ngFor="let p of cand.stratg_perren|splitter;">{{p}}</p></div><br>
+
+    <div class="print"> <b>Document de stratégie de pérrennisation : </b><p *ngIf="(cand.file_per == '' || cand.file_per == null); else perBlock">Aucun fichier n'est encore ajouté </p><ng-template #perBlock> <a (click)= DownloadFile(cand.file_per) > <i class="fas fa-download"></i> Stratégie de pérrénisation du projet {{cand.nom_projet}}</a></ng-template></div>
+
+    <div> <b>Gouvernance du projet : </b><br><br><p *ngFor="let g of cand.gouvernance|splitter;">{{g}}</p></div><br>
+    <div> <b>Organisation opérationnelle : </b><br><br><p *ngFor="let o of cand.org_opera|splitter;">{{o}}</p></div><br>
+    <p> <b>Date de transfert à un partenaire : </b>{{cand.date_transfert}}</p>
+
+    <div class="box-title" id="box-title">
+            <hr>
+            <h3 class="">Partenaires</h3>
+            <hr>
+    </div>
+
+    <div class=" small-box" *ngFor =" let acad of cand.partenaireAcad ;  let i = index ;">
+        <h4> <b>Partenaire académique {{i+1}} : </b>{{acad.institution}}</h4><br>
+        <p> <b>Institution du correspondant du projet : </b>{{acad.institution}}</p>
+        <p> <b>Nom et prénom du correspondant du projet : </b>{{acad.nom}}</p>
+        <p> <b>Fonction : </b>{{acad.fonction}}</p>
+        <p> <b>Email : </b>{{acad.email}}</p>
+        <p> <b>Ville et Code postal : </b>{{acad.ville}}</p>
+        <p> <b>Pays : </b>{{acad.pays}}</p>
+        <p class="print"> <b>Url : </b> <p>{{acad.url}}</p>
+        <div class="print"> <b>Lettre d'engagement du partenaire : </b> <p *ngIf="(acad.lettre == '' || acad.lettre == null); else acadBlock">Aucun fichier n'est encore ajouté </p><ng-template #acadBlock><a (click)= DownloadFile(acad.lettre) > <i class="fas fa-download"></i> Lettre d'engagement du partenaire {{acad.institution}} </a></ng-template></div>
+    </div>
+    <div class=" small-box" *ngFor =" let eco of cand.partenaireSe ; let i = index;">
+        <h4> <b>Partenaire socio-économique {{i+1}} : </b>{{eco.institution}}</h4><br>
+        <p> <b>Institution du correspondant du projet : </b>{{eco.institution}}</p>
+        <p> <b>Nom et prénom du correspondant du projet : </b>{{eco.nom}}</p>
+        <p> <b>Fonction : </b>{{eco.fonction}}</p>
+        <p> <b>Email : </b>{{eco.email}}</p>
+        <p> <b>Ville et Code postal : </b>{{eco.ville}}</p>
+        <p> <b>Pays : </b>{{eco.pays}}</p>
+        <p class="print"> <b>Url : </b> <p>{{eco.url}}</p>
+        <div class="print"> <b>Lettre d'engagement du partenaire : </b> <p *ngIf="(eco.lettre == '' || eco.lettre == null); else ecoBlock">Aucun fichier n'est encore ajouté </p><ng-template #ecoBlock><a (click)= DownloadFile(eco.lettre) > <i class="fas fa-download"></i> Lettre d'engagement du partenaire {{eco.institution}} </a></ng-template></div>
+    </div>
+    <div class=" small-box" *ngFor =" let aut of cand.partenaireAutre ; let i = index; ">
+        <h4> <b>Autre partenaire {{i+1}} : </b>{{aut.institution}}</h4><br>
+      <p> <b>Institution du correspondant du projet : </b>{{aut.institution}}</p>
+      <p> <b>Nom et prénom du correspondant du projet : </b>{{aut.nom}}</p>
+      <p> <b>Fonction : </b>{{aut.fonction}}</p>
+      <p> <b>Email : </b>{{aut.email}}</p>
+      <p> <b>Ville et Code postal : </b>{{aut.ville}}</p>
+      <p> <b>Pays : </b>{{aut.pays}}</p>
+      <p class="print"> <b>Url : </b> <p>{{aut.url}}</p>
+      <div class="print"> <b>Lettre d'engagement du partenaire : </b><p *ngIf="(aut.lettre == '' || aut.lettre == null); else autBlock">Aucun fichier n'est encore ajouté </p> <ng-template #autBlock><a (click)= DownloadFile(aut.lettre) > <i class="fas fa-download"></i> Lettre d'engagement du partenaire {{aut.institution}}</a></ng-template>
+      </div>
+
+  </div>
+
+  <div class=" small-box" *ngFor =" let impl of cand.implantations ; let i = index; ">
+    <h4> <b>Implantation {{i+1}} : </b>{{impl.institution}}</h4><br>
+  <p> <b>Institution du correspondant du projet : </b>{{impl.institution}}</p>
+  <p> <b>Nom et prénom du correspondant du projet : </b>{{impl.nom}}</p>
+  <p> <b>Fonction : </b>{{impl.fonction}}</p>
+  <p> <b>Email : </b>{{impl.email}}</p>
+  <p> <b>Ville et Code postal : </b>{{impl.ville}}</p>
+  <p> <b>Pays : </b>{{impl.pays}}</p>
+  <p class="print"> <b>Url : </b> <p>{{impl.url}}</p>
+  <div class="print"> <b>Lettre d'engagement du partenaire : </b><p *ngIf="(impl.lettre == '' || impl.lettre == null); else implBlock">Aucun fichier n'est encore ajouté </p> <ng-template #implBlock> <a (click)= DownloadFile(impl.lettre) > <i class="fas fa-download"></i> lettre d'engagement du partenaire {{impl.institution}}</a></ng-template></div>
+
+  </div>
+
+
+    <div class="box-title" id="box-title">
+            <hr>
+            <h3 class="">Eléments financiers </h3>
+            <hr>
+    </div>
+
+    <p> <b>Budget global recettes  : </b></p>
+        <i class="description"> La présence d'une * à droite du montant pour signifier qu’il s’agit d’un apport en nature
+        (personnel mis à disposition, locaux mis à disposition, etc.<br></i>
+        <br>
+    <div class="table-responsive" *ngFor =" let auf of cand.recetteAUF ;">
+            <table class="table table-bordered">
+               <tr>
+                   <th>Partenaire</th>
+                   <th>Recettes</th>
+                   <th>Année 1</th>
+                   <th>Année 2</th>
+                   <th>Année 3</th>
+                   <th>Année 4</th>
+               </tr>
+               <tr>
+                   <td rowspan="3" class="titre-table" >AUF</td>
+                   <td>Fonctionnement</td>
+                   <td> {{auf.afa1}} <div *ngIf="auf.cafa1 == 'true' ">Apport en nature</div> </td>
+                   <td> {{auf.afa2}} <div *ngIf="auf.cafa2 == 'true' ">Apport en nature</div></td>
+                   <td> {{auf.afa3}} <div *ngIf="auf.cafa3 == 'true' ">Apport en nature</div></td>
+                   <td> {{auf.afa4}} <div *ngIf="auf.cafa4 == 'true' ">Apport en nature</div></td>
+               </tr>
+               <tr>
+                   <td>Investissement</td>
+                   <td> {{auf.aia1}} <div *ngIf="auf.caia1 == 'true' ">Apport en nature</div></td>
+                   <td> {{auf.aia2}} <div *ngIf="auf.caia2 == 'true' ">Apport en nature</div></td>
+                   <td> {{auf.aia3}} <div *ngIf="auf.caia3 == 'true' ">Apport en nature</div></td>
+                   <td> {{auf.aia4}} <div *ngIf="auf.caia4 == 'true' ">Apport en nature</div></td>
+               </tr>
+               <tr>
+                   <td>Personnel</td>
+                   <td> {{auf.apa1}} <div *ngIf="auf.capa1 == 'true' ">Apport en nature</div></td>
+                   <td> {{auf.apa2}} <div *ngIf="auf.capa2 == 'true' ">Apport en nature</div></td>
+                   <td> {{auf.apa3}} <div *ngIf="auf.capa3 == 'true' ">Apport en nature</div></td>
+                   <td> {{auf.apa4}} <div *ngIf="auf.capa4 == 'true' ">Apport en nature</div></td>
+                </tr>
+                </table>
+    </div>
+
+    <div class="table-responsive" *ngFor =" let acad of cand.recettePartAcad ;">
+        <table class="table table-bordered" >
+           <tr>
+               <th>Partenaire</th>
+               <th>Recettes</th>
+               <th>Année 1</th>
+               <th>Année 2</th>
+               <th>Année 3</th>
+               <th>Année 4</th>
+           </tr>
+           <tr>
+               <td rowspan="3" class="titre-table" >{{acad.npartenaire}}</td>
+               <td>Fonctionnement</td>
+               <td>{{acad.faa1}} <div *ngIf="acad.cfaa1 == 'true' ">Apport en nature</div></td>
+               <td>{{acad.faa2}} <div *ngIf="acad.cfaa2 == 'true' ">Apport en nature</div></td>
+               <td>{{acad.faa3}} <div *ngIf="acad.cfaa3 == 'true' ">Apport en nature</div></td>
+               <td>{{acad.faa4}} <div *ngIf="acad.cfaa4 == 'true' ">Apport en nature</div></td>
+           </tr>
+           <tr>
+               <td>Investissement</td>
+               <td> {{acad.iaa1}} <div *ngIf="acad.ciaa1 == 'true' ">Apport en nature</div></td>
+               <td> {{acad.iaa2}} <div *ngIf="acad.ciaa2 == 'true' ">Apport en nature</div></td>
+               <td> {{acad.iaa3}} <div *ngIf="acad.ciaa3 == 'true' ">Apport en nature</div></td>
+               <td> {{acad.iaa4}} <div *ngIf="acad.ciaa4 == 'true' ">Apport en nature</div></td>
+           </tr>
+           <tr>
+               <td>Personnel</td>
+               <td> {{acad.paa1}} <div *ngIf="acad.cpaa1 == 'true' ">Apport en nature</div></td>
+               <td> {{acad.paa2}} <div *ngIf="acad.cpaa2 == 'true' ">Apport en nature</div></td>
+               <td> {{acad.paa3}} <div *ngIf="acad.cpaa3 == 'true' ">Apport en nature</div></td>
+               <td> {{acad.paa4}} <div *ngIf="acad.cpaa4 == 'true' ">Apport en nature</div></td>
+            </tr>
+            </table>
+</div>
+
+<div class="table-responsive" *ngFor =" let se of cand.recettePartSe ;">
+    <table class="table table-bordered" >
+       <tr>
+           <th>Partenaire</th>
+           <th>Recettes</th>
+           <th>Année 1</th>
+           <th>Année 2</th>
+           <th>Année 3</th>
+           <th>Année 4</th>
+       </tr>
+       <tr>
+           <td rowspan="3" class="titre-table" >{{se.npartenaire}}</td>
+           <td>Fonctionnement</td>
+           <td>{{se.fsa1}} <div *ngIf="se.cfsa1 == 'true' ">Apport en nature</div></td>
+           <td>{{se.fsa2}} <div *ngIf="se.cfsa2 == 'true' ">Apport en nature</div></td>
+           <td>{{se.fsa3}} <div *ngIf="se.cfsa3 == 'true' ">Apport en nature</div></td>
+           <td>{{se.fsa4}} <div *ngIf="se.cfsa4 == 'true' ">Apport en nature</div></td>
+       </tr>
+       <tr>
+           <td>Investissement</td>
+           <td> {{se.isa1}} <div *ngIf="se.cisa1 == 'true' ">Apport en nature</div> </td>
+           <td> {{se.isa2}} <div *ngIf="se.cisa2 == 'true' ">Apport en nature</div></td>
+           <td> {{se.isa3}} <div *ngIf="se.cisa3 == 'true' ">Apport en nature</div> </td>
+           <td> {{se.isa4}} <div *ngIf="se.cisa4 == 'true' ">Apport en nature</div> </td>
+       </tr>
+       <tr>
+           <td>Personnel</td>
+           <td> {{se.psa1}} <div *ngIf="se.cpsa1 == 'true' ">Apport en nature</div></td>
+           <td> {{se.psa2}} <div *ngIf="se.cpsa2 == 'true' ">Apport en nature</div></td>
+           <td> {{se.psa3}} <div *ngIf="se.cpsa3 == 'true' ">Apport en nature</div></td>
+           <td> {{se.psa4}} <div *ngIf="se.cpsa4 == 'true' ">Apport en nature</div></td>
+        </tr>
+        </table>
+</div>
+
+<div class="table-responsive" *ngFor =" let aut of cand.recettePartAutre ;">
+    <table class="table table-bordered" >
+       <tr>
+           <th>Partenaire</th>
+           <th>Recettes</th>
+           <th>Année 1</th>
+           <th>Année 2</th>
+           <th>Année 3</th>
+           <th>Année 4</th>
+       </tr>
+       <tr>
+           <td rowspan="3" class="titre-table" >{{aut.npartenaire}}</td>
+           <td>Fonctionnement</td>
+           <td>{{aut.fta1}} <div *ngIf="aut.cfta1 == 'true' ">Apport en nature</div> </td>
+           <td>{{aut.fta2}} <div *ngIf="aut.cfta2 == 'true' ">Apport en nature</div></td>
+           <td>{{aut.fta3}} <div *ngIf="aut.cfta3 == 'true' ">Apport en nature</div></td>
+           <td>{{aut.fta4}} <div *ngIf="aut.cfta4 == 'true' ">Apport en nature</div></td>
+       </tr>
+       <tr>
+           <td>Investissement</td>
+           <td> {{aut.ita1}} <div *ngIf="aut.cita1 == 'true' ">Apport en nature</div></td>
+           <td> {{aut.ita2}} <div *ngIf="aut.cita2 == 'true' ">Apport en nature</div></td>
+           <td> {{aut.ita3}} <div *ngIf="aut.cita3 == 'true' ">Apport en nature</div></td>
+           <td> {{aut.ita4}} <div *ngIf="aut.cita4 == 'true' ">Apport en nature</div></td>
+       </tr>
+       <tr>
+           <td>Personnel</td>
+           <td> {{aut.pta1}} <div *ngIf="aut.cpta1 == 'true' ">Apport en nature</div> </td>
+           <td> {{aut.pta2}} <div *ngIf="aut.cpta2 == 'true' ">Apport en nature</div></td>
+           <td> {{aut.pta3}} <div *ngIf="aut.cpta3 == 'true' ">Apport en nature</div></td>
+           <td> {{aut.pta4}} <div *ngIf="aut.cpta4 == 'true' ">Apport en nature</div></td>
+        </tr>
+        </table>
+</div>
+
+
+<p> <b>Budget global dépenses   : </b></p>
+<div class="table-responsive">
+    <table class="table table-bordered" *ngFor =" let dep of cand.Depences ;">
+       <tr>
+           <th class="col-md-3 col-xs-5">Dépenses</th>
+           <th>Année 1</th>
+       </tr>
+       <tr>
+            <td class="titre-table" >Fonctionnement <br> <i class="description">(consommable, vacations, détaillez par nature) </i></td>
+            <td><p class="text-center">{{dep.d_fct_a1}}</p><br><p class="text-center">{{dep.m_d_fct_a1}}</p></td>
+        </tr>
+        <tr>
+            <td class="titre-table" >Investissement <br><i class="description">(détail des équipements prévus)</i></td>
+            <td><p class="text-center">{{dep.d_invest_a1}}</p><br><p class="text-center">{{dep.m_d_invest_a1}}</p></td>
+        </tr>
+        <tr>
+            <td class="titre-table" >Personnel <br> <i class="description">(indiquez le côut chargé par niveau / type / grade)</i> </td>
+            <td><p class="text-center">{{dep.d_perso_a1}}</p><br><p class="text-center">{{dep.m_d_perso_a1}}</td>
+            </tr>
+        <tr>
+                <td class="titre-table">Total  </td>
+                <td> <p class="text-center">{{totdepa1}}</p> </td>
+        </tr>
+
+
+
+   <tr>
+       <th class="col-md-3 col-xs-5">Dépenses</th>
+       <th>Année 2</th>
+   </tr>
+   <tr>
+        <td class="titre-table" >Fonctionnement <br> <i class="description">(consommable, vacations, détaillez par nature) </i></td>
+        <td><p class="text-center">{{dep.d_fct_a2}}</p><br><p class="text-center">{{dep.m_d_fct_a2}}</p></td>
+    </tr>
+    <tr>
+        <td class="titre-table" >Investissement <br><i class="description">(détail des équipements prévus)</i></td>
+        <td><p class="text-center">{{dep.d_invest_a2}}</p><br><p class="text-center">{{dep.m_d_invest_a2}}</p></td>
+    </tr>
+    <tr>
+        <td class="titre-table" >Personnel <br> <i class="description">(indiquez le côut chargé par niveau / type / grade)</i> </td>
+        <td><p class="text-center">{{dep.d_perso_a2}}</p><br><p class="text-center">{{dep.m_d_perso_a2}}</td>
+        </tr>
+    <tr>
+            <td class="titre-table">Total  </td>
+            <td><p class="text-center">{{totdepa2}}</p></td>
+    </tr>
+
+
+
+<tr>
+   <th class="col-md-3 col-xs-5">Dépenses</th>
+   <th>Année 3</th>
+</tr>
+<tr>
+    <td class="titre-table" >Fonctionnement <br> <i class="description">(consommable, vacations, détaillez par nature) </i></td>
+    <td><p class="text-center">{{dep.d_fct_a3}}</p><br><p class="text-center">{{dep.m_d_fct_a3}}</p></td>
+</tr>
+<tr>
+    <td class="titre-table" >Investissement <br><i class="description">(détail des équipements prévus)</i></td>
+    <td><p class="text-center">{{dep.d_invest_a3}}</p><br><p class="text-center">{{dep.m_d_invest_a3}}</p></td>
+</tr>
+<tr>
+    <td class="titre-table" >Personnel <br> <i class="description">(indiquez le côut chargé par niveau / type / grade)</i> </td>
+    <td><p class="text-center">{{dep.d_perso_a3}}</p><br><p class="text-center">{{dep.m_d_perso_a3}}</td>
+    </tr>
+<tr>
+        <td class="titre-table">Total  </td>
+        <td><p class="text-center">{{totdepa3}}</p></td>
+</tr>
+
+
+
+<tr>
+   <th class="col-md-3 col-xs-5">Dépenses</th>
+   <th>Année 4</th>
+</tr>
+<tr>
+    <td class="titre-table" >Fonctionnement <br> <i class="description">(consommable, vacations, détaillez par nature) </i></td>
+    <td><p class="text-center">{{dep.d_fct_a4}}</p><br><p class="text-center">{{dep.m_d_fct_a4}}</p></td>
+</tr>
+<tr>
+    <td class="titre-table" >Investissement <br><i class="description">(détail des équipements prévus)</i></td>
+    <td><p class="text-center">{{dep.d_invest_a4}}</p><br><p class="text-center">{{dep.m_d_invest_a4}}</p></td>
+</tr>
+<tr>
+    <td class="titre-table" >Personnel <br> <i class="description">(indiquez le côut chargé par niveau / type / grade)</i> </td>
+    <td><p class="text-center">{{dep.d_perso_a4}}</p><br><p class="text-center">{{dep.m_d_perso_a4}}</td>
+    </tr>
+<tr>
+        <td class="titre-table">Total  </td>
+        <td><p class="text-center">{{totdepa4}}</p></td>
+</tr>
+</table>
+</div>
+
+ <div class="box-title" id="box-title">
+            <hr>
+            <h3  class="print">Autres documents </h3>
+            <hr>
+</div>
+<div class="print"> <b>Budget prévisionnel détaillé par activité : </b><p *ngIf="(cand.budget_prev == '' || cand.budget_prev == null); else budBlock">Aucun fichier n'est encore ajouté </p><ng-template #budBlock> <a (click)= DownloadFile(cand.budget_prev) > <i class="fas fa-download"></i>Budget prévisionnel détaillé par activité du projet {{cand.nom_projet}} </a></ng-template></div>
+<div class="print"> <b>Charte de qualité signée : </b><p *ngIf="(cand.charte_qualite == '' || cand.charte_qualite == null); else charBlock">Aucun fichier n'est encore ajouté </p><ng-template #charBlock> <a (click)= DownloadFile(cand.charte_qualite) > <i class="fas fa-download"></i> Charte de qualité signée du projet {{cand.nom_projet}} </a></ng-template></div>
+<br>
+
+
+
+<div class="row print" [hidden]="userRole !== 'CNEUF_ADMIN'">
+    <div class="row">
+     <div class="box-title" id="box-title">
+        <hr>
+        <h3 class="">Commentaire </h3>
+        <hr>
+    </div>
+    <div class=" col-md-8  col-md-offset-2">
+     <textarea class="form-control " #comm></textarea>
+    </div>
+    </div>
+    <hr>
+<br>
+        <div class="text-center" >
+            <button class=" btn btn1fin " name="" type="submit" (click)= "retourBr(comm.value)"   [disabled]="cand.statut !== '1'"> <i class="fas fa-edit"> </i>  Remettre en brouillon</button>
+            <button class=" btn btn1" name="" type="submit" (click)= "Consolider(cand.id)"  [disabled]="cand.statut !== '1'"> <i class="fas fa-check"> </i> &nbsp;Consolider</button> &nbsp;
+
+        </div>
+</div>
+<div class="container" [hidden]="userid == cand.user_id">
+    <div class="row">
+<div class="text-center" [hidden]="userRole !== 'CNEUF_EXPERT'">
+    <button class=" btn btn1" data-toggle="modal" data-target="#createModal"><i class="glyphicon glyphicon-ok"></i> Evaluer</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!--Formulaire d'évaluation pour l'expert-->
+
+<div class="modal fade" id="createModal" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Evaluation</h4>
+  
+        </div>
+        <div class="modal-body">
+                <div style="margin: auto;">
+                  <form [formGroup]="form" >
+                  <label class="col-md-4" for="critère">Critère 1 :&nbsp;Objectifs du projet</label>
+                  <input class="inputEval form-control" type="number" formControlName="n1"> <b> / 10</b>
+                  <br><br>
+                   
+                  <label class="col-md-4" for="critère"><b>Critère 2 :</b> &nbsp;Cadre logique </label>
+                  <input type="number" class=" inputEval form-control" formControlName="n2"> <b> / 10</b>
+                  <br><br>
+                  <label class="col-md-4" for="critère">Critère 3 :&nbsp;Description détaillée </label>
+                  <input type="number" class=" inputEval form-control" formControlName="n3"> <b> / 10</b>
+                  <br><br>
+                  <label class="col-md-4" for="critère">Critère 4 :&nbsp;Stratégie communication  </label>
+                  <input type="number" class=" inputEval form-control" formControlName="n4"> <b> / 5</b>
+                  <br><br>
+                  <label class="col-md-4" for="critère">Critère 5 :&nbsp;Gouvernance du projet   </label>
+                  <input type="number" class=" inputEval form-control" formControlName="n5"> <b> / 5</b>
+                  <br><br>
+                  <label class="col-md-4" for="critère">Critère 6 :&nbsp;Évaluation du projet   </label>
+                  <input type="number" class=" inputEval form-control" formControlName="n6"> <b> / 5</b>
+                  <br><br>
+                  <label class="col-md-4" for="critère">Critère 7 :&nbsp;Éléments financiers   </label>
+                  <input type="number" class=" inputEval form-control" formControlName="n7"><b> / 15</b>
+                  <br><br>
+  
+              <h4>Commentaire</h4>
+              <textarea class=" form-control" formControlName="commentaire"> </textarea>
+            </form>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)= evaluer(cand.id,form)>Evaluer</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+    </div>
+  
+

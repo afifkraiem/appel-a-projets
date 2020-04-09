@@ -1,0 +1,88 @@
+
+<div class="col-md-12">
+  <br><br>
+  <div class="box">
+
+  
+<br>
+<br>
+
+ 
+  <div class="form-group">
+        <h3>Affectation des experts </h3>
+  </div>
+
+<br><br>
+<!--Affichage des candidatures avec les affectations-->
+
+<br> <br>
+    <div class="row ">
+        <div class="table-responsive" >
+            <table  class="table table-bordered">
+              <thead>
+              <tr>
+                  <th class="text-center">Intitulé du projet</th>
+                  <th class="text-center">Experts assignés</th>
+                  <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="non-vu" *ngFor= " let cand of candidatures  ">
+                  <td class="text-center" style="vertical-align: middle;">{{cand.nom_projet}}</td>
+                  <td ><ng-container *ngIf="cand.Evaluation.length == 0"> Aucun expert n'est encore assigné à cette candidature</ng-container><tbody *ngFor="let ev of cand.Evaluation;"><ul *ngFor="let user of experts;">
+                    <li *ngIf="user.id == ev.idExpert">{{user.nom}}&nbsp; &nbsp;<i class="far fa-trash-alt" title="Retirer expert" style="color: red; font-weight: bolder; cursor:pointer;"></i>  </li> 
+                 
+                  </ul> 
+                  </tbody>
+                </td>
+
+
+                  <td class="text-center">
+                    <button class=" btn btn1 " data-toggle="modal" [attr.data-target]="'#createModal' + cand.id"  (click)=getAssignedExperts(cand.id)> <i class="fa fa-plus-square" ></i> &nbsp; Affecter à un expert</button>
+                   
+                  </td>
+
+
+                  <!--Assigner Expert -->
+
+                  <div class="modal fade" [attr.id]="'createModal' + cand.id" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Ajouter un expert</h4>
+                      
+                          </div>
+                          <div class="modal-body">
+                            <label for="expert">Sélectionner un expert:</label><br>
+                            
+                            <ng-select class="custom" [multiple]="true"  [searchable]= "true" #ide>
+                              <ng-option *ngFor="let expert of experts" [value]="expert.id"  [disabled]= verifyExp(expert.id) >{{expert.nom}}</ng-option>
+                       </ng-select>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" (click)= assignExpert(ide.selectedValues,cand.id) data-dismiss="modal">Envoyer</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                      
+                          </div>
+                      
+                        </div>
+                      
+                      </div>
+                      </div>
+                 
+                </tr>
+                
+                </tbody>
+
+             </table>
+
+             </div>
+
+    </div>
+
+  </div>
+</div>
+

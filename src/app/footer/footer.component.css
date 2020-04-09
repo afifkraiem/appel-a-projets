@@ -1,0 +1,57 @@
+
+.bs-docs-footer {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255, 255, 255, 1.0);
+	height: auto;
+	text-align: center;
+}
+.footer-layout img{
+	display: block;
+    margin: 10px auto;
+    height: 100px;
+    position: absolute;
+}
+.footer-layout .logo {
+    bottom: 5px;
+}
+.footer-layout .logo.idneuf {
+    right: 0;
+}
+.bs-text-centered {
+	position: relative;
+	font-family: open sans;
+}
+
+@media (max-width: 600px) {
+    .bs-text-centered{
+    display:flex;
+    }
+    .bs-text-centered img{
+        max-width: 55px;
+        height:auto;
+    }
+    .footer-layout .logo.idneuf{
+    position: relative;
+    left: auto;
+    right: auto;
+    margin-left: 9px;
+    }
+    .footer-layout .logo.auf{
+    position: relative;
+    left: auto;
+    right: auto;
+    margin-right: 9px;
+    }
+    .container1{
+        height:95px;
+    }
+    .container1 a{
+         font-size: 14px;
+        text-align: center;
+        left: 0;
+        right: 0;
+    }
+    }
+    

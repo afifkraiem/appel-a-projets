@@ -1,0 +1,76 @@
+
+<div class="col-md-12">
+        <br><br>
+        <div class="box row ">
+
+    <!-- chiffres-->
+            <div class="col-md-5">
+                
+                <a routerLink = "/admin/GestionUsers">
+                    <div class="stat" >
+                        <div class="icone">
+                            <i class="fas fa-users fa-3x"></i>
+                        </div>
+                        <div class="chiffre">
+                            <label>{{nbrUser}}</label>
+                            <p>Utilisateurs  </p>
+                          </div>
+                    </div></a>
+                    <a routerLink = "/admin/Candidatures">
+                    <div class="stat" >
+                        <div class="icone">
+                            <i class="fab fa-elementor fa-3x"></i>
+                        </div>
+                        <div class="chiffre">
+                            <label>{{nbrCand}}</label>
+                            <p>Canditatures  </p>
+
+                        </div>
+                    </div> </a>
+
+                    <div class="stat" >
+                        <div class="icone">
+                                <i class="far fa-newspaper fa-3x"></i>
+                        </div>
+                        <div class="chiffre">
+                            <label>{{nbrCamp}}</label>
+                            <p>Campages</p>
+                        </div>
+                    </div>
+
+                    <div class="stat" >
+                        <div class="icone">
+                                <i class="far fa-newspaper fa-3x"></i>
+                        </div>
+                        <div class="chiffre">
+                            <label>{{nbrActs}}</label>
+                            <p>Articles  </p>
+                        </div>
+                    </div>
+
+            </div>
+        
+            <!--     camembert-->
+
+            <div class="col-md-6">
+                <div class="row text-center">
+                 <label> Etat des candidatures</label>
+                 <canvas baseChart
+                 [data]="pieChartData"
+                 [labels]="pieChartLabels"
+                 [chartType]="pieChartType"
+                 [options]="pieChartOptions"
+                 [legend]="pieChartLegend"
+                ></canvas>
+
+
+            </div>
+          </div>
+          <br><br>
+          
+          <div class="chart-container" style="position: relative; height:40vh; width:70vw">    
+            <canvas id="canvas">{{ barchart }}</canvas>    
+          </div>  
+        </div>
+           
+          </div>

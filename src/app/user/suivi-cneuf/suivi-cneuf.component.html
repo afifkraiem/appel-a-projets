@@ -1,0 +1,66 @@
+
+
+<br> <br>
+<div class="box">
+        <br><br>
+        <h3>Rapports de suivi:</h3><br>
+        <p>Cette section est conçue pour ajouter des rapports de suivi d'activité pour vos projets </p><br>
+
+        <div class="pull-right">
+            <button class=" btn btn1" data-toggle="modal" data-target="#createModal" > <i class="fa fa-plus-square" ></i> &nbsp; Ajouter un rapport</button></div><br><br>
+<div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-2"  *ngFor="let c of cneufs;">
+        <img src="./assets/img/37044.png" style="height:100px; width:100px "  (click) = OnSelect(c) [class.selected]="c == selectedCneuf"><br>
+          {{c.name}}
+        
+      </div>
+      
+    </div>
+    
+</div >
+</div>
+<br><br><br>
+<div class="box" *ngIf="selectedCneuf">
+        <h3>liste de rapports de suivi du projet {{selectedCneuf.name}}:</h3> <br>
+        <ul *ngFor="let r of selectedCneuf.Rapports;">
+            <li>{{r}}</li><i class="fas fa-file-download"></i>
+        </ul>
+</div>
+<!--Modal pour le formulaire d'ajout d'un rapport-->
+<div class="modal fade" id="createModal" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Ajouter un rapport</h4>
+    
+        </div>
+        <div class="modal-body">
+          <form [formGroup]= "form">
+            <label for="titre">Choisir un projet:</label>
+            <ng-select class="custom"  [searchable]= "true" >
+                <ng-option *ngFor="let c of cneufs" [value]="c.id"  >{{c.nom_projet}}</ng-option>      
+              </ng-select> 
+              <label for="titre">Intitulé du rapport</label>
+              <input type="text" class="form-control" placeholder="Choisir un titre pour le rapport" formControlName="intitule">
+              <label for="titre">Rapport</label>
+              <input type="file" class="form-control" placeholder="Créer une petite introduction" formControlName="rapport">
+              <br>
+              <br>
+          
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)= envoyer(form)>Enregistrer</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+    
+        </div>
+    
+      </div>
+    
+    </div>
+    </div>

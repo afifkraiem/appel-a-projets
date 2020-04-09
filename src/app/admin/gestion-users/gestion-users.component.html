@@ -1,0 +1,62 @@
+
+<div class="col-md-12">
+    <br>
+    <br>
+  <div class="box">
+      <div class="box-title" id="box-title">
+          <h4 class="">Liste des utilisateurs</h4>
+          <a class="pull-right" role="button" data-toggle="collapse" data-parent="#box-title" data-target="#box-content" > <i class="fa fa-chevron-up fa-lg"></i></a>
+      </div>
+
+      <div class="box-content collapse in" id="box-content">
+
+        <div class="utilisateurs hidden-sm">
+            <div  class="row ">
+                <div class="col-md-6 ">
+                  <label> Informations générales</label>
+                </div>
+
+
+                <div class="col-md-3">
+                  <label> Actions</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="utilisateurs" *ngFor= " let user of users; let i= index;">
+          <div  class="row ">
+            <div class="col-md-6">
+
+              <div class="col-md-2 col-sm-4">
+                <div class="center">
+                  <img src="..\assets\img\user.png" class="img-responsive img-uti">
+                </div>
+              </div>
+
+              <div class="col-md-9 col-sm-8 ">
+                <p><b>Nom d'utilisateur:</b> {{user.nom}}</p>
+                <p><b>Email:</b> {{user.email}}</p>
+                <div *ngFor= " let role of user.role ;">
+                    <p><b>Rôle actuel:</b> {{role}}</p>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-md-3 col-sm-12 ">
+            <hr class="visible-sm visible-xs">
+              
+            <button type="submit" class=" btn btn1fin pull-right" (click)="setAsExpert(user.id)" > <i class="fas fa-exchange-alt"></i> Définir comme expert</button>
+            <br>
+
+            </div>
+          
+
+          </div><br> <br>
+        </div>
+      </div>
+
+
+  </div>
+</div>

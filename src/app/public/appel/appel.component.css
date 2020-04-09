@@ -1,0 +1,65 @@
+.btn11{
+    display: inline-block;
+    min-width: 200px;
+    font-size: 13.5px;
+    text-decoration: none;
+    text-align: center;
+    line-height: normal;
+    background: transparent;
+    border: 2px solid #702182;
+    color: #1c1c1c;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 14px 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.btn11:hover{
+    text-transform: uppercase;
+    background:  #702182;
+    border: 2px solid #702182;
+    color: white;
+    
+}
+.sidebar{
+    margin-top: 5%;
+}
+.cont {
+    position: relative;
+    
+  }
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color:gray;
+  }
+  .text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .cont:hover .overlay {
+    opacity: 0.4;
+    cursor: pointer;
+  }
+.hovereffect{
+        display: block;
+        width: 100%;
+        height: auto;
+}
+.modal-lg{
+    width:60%;
+}

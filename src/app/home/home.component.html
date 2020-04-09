@@ -1,0 +1,71 @@
+<app-header></app-header>
+<div class="homeHeader">
+  <div class="container">
+    <h2>Plateforme de soumission de nouveaux projets  AUF</h2>
+  </div>
+  <div class="homeBody">
+    <div class="container fondarc">
+      <div class=" col-md-8 col-md-offset-2  col-sm-8 col-sm-offset-2 col-xs-12 ">
+
+        <div class="row row2">
+
+            <a routerLink= "/Modalités" class="col-md-5 col-md-offset-2 col-sm-5 col-xs-6  ">
+              <div class="cercle2 hidden-xs"><h5>Modalités et doumentation utile</h5></div>
+                <div class="visible-xs cercle2xs"> <p>Modalités et doumentation utile</p></div>                </a>
+            <a routerLink="/Actualités" class="col-md-3  col-sm-6 col-xs-6">
+                <div class="cercle3 hidden-xs"><h5>Appel à projet international AUF COVID-19</h5></div>
+              <div class="cercle3xs visible-xs"><p>Appel à projet international AUF COVID-19</p></div>
+            </a>
+        </div>
+      </div>
+        <div class=" col-md-8 col-md-offset-2  col-sm-12  col-xs-12   ">
+
+        <div class="row row3">
+          <div class="col-md-5  col-sm-5 col-xs-6  ">
+            <a href="https://auth-b2c.auf.org/auth/?authorize&client_id=11_56flyni8qug4s0sw04gkww8skskk8k444o44k4k0cg0cwsco4k&return_url=https%3A%2F%2Fcneuf.auf.org%2F%23%2FsignIn"  *ngIf= " !loggedIn" >
+
+             
+              <div class=" cercle4 hidden-xs"><h5>Candidatures</h5></div>
+              <div class=" cercle4xs visible-xs"><p>Candidatures</p></div>
+            </a>
+           <a routerLink = "/user/MesCandidatures" *ngIf= " auth === 'CNEUF_COORDONNATEUR' ">
+
+            
+              <div class=" cercle4 hidden-xs"><h5>Candidatures</h5></div>
+              <div class=" cercle4xs visible-xs"><p>Candidatures</p></div>
+          </a>
+            <a routerLink = "/admin/Candidatures" *ngIf= " auth === 'CNEUF_ADMIN' ">
+              <div class=" cercle4"><h5>Candidatures</h5></div>
+
+            </a>
+              <a routerLink = "/user/MesCandidatures" *ngIf= " auth === 'CNEUF_EXPERT' ">
+                
+              <div class=" cercle4 hidden-xs"><h5>Candidatures</h5></div>
+              <div class=" cercle4xs visible-xs"><p>Candidatures</p></div>
+
+              </a>
+          </div>
+          <div class="col-md-7 col-sm-7 col-xs-6">
+            <a href=# >
+                <div class="cercle5 hidden-xs"><h5>Cartographie</h5></div>
+                <div class="cercle5xs visible-xs"><p>Cartographie</p></div>
+            </a>
+        </div>
+      </div>
+      </div>
+    </div>
+
+      <div class="msg">
+          
+          <h5 ></h5>
+        <br>
+        <br>
+        <br>
+        <br>
+        </div>
+    </div>
+    </div>
+
+
+
+<app-footer></app-footer>

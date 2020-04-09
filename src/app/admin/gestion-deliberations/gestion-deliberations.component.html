@@ -1,0 +1,100 @@
+
+<div class="col-md-12">
+  <br><br>
+  <div class="box">
+<br>
+<br>
+ <form>
+                <div class="row ">
+                        <div class="pull-right">
+                          <button class=" btn btn1" data-toggle="modal" data-target="#createModal" > <i class="fa fa-plus-square" ></i> &nbsp; Ajouter une délibération</button>
+                         
+                          <!--Modal pour le formulaire de création d'une nouvelle campagne-->
+                  
+                          <div class="modal fade" id="createModal" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">Ajouter une délibération</h4>
+                          
+                              </div>
+                              <div class="modal-body">
+                                <form [formGroup]= "form">
+                                    <label for="titre">Choisir un projet</label>
+                                        <ng-select class="custom"  [searchable]= "true" formControlName="idCneuf" >
+                                            <ng-option *ngFor="let cand of candidatures" [value]="cand.id"  >{{cand.nom_projet}}</ng-option>      
+                                        </ng-select>
+
+                                    <label for="titre">Date de la délibération</label>
+                                    <input type="date" class="form-control" placeholder="Entrer la date de la délibération" formControlName="date">
+                                    <label for="titre">Ajouter le fichier de délibération ( <i class="fas fa-file-excel"></i> Excel)</label>
+                                    <input type="file" class="form-control" [formControlName]="fichier" (change)="uploadFile($event,file)" #file name="fichier">
+                                    <br>
+                                    <br>
+                                
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn1"  data-dismiss="modal" (click)= EnvoyerDelib()><i class="fas fa-plus-circle"></i> Ajouter</button>
+                          
+                              </div>
+                          
+                            </div>
+                          
+                          </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                            <h3>Liste des délibérations </h3>
+                            <br>
+                        <div>
+                  <br>
+                  <br>
+          <h4 >Choisir une Campagne</h4>
+            <ng-select class="custom" [multiple]="true" (change)='onSelect($event)' [searchable]= "true" (clear)= 'getAllCandidatures()'>
+              <ng-option *ngFor="let camp of Campagnes" [value]="camp.id" >{{camp.nomcomp}}</ng-option>
+       </ng-select>
+        </div>
+
+  </div>
+</form>
+
+
+<br>
+
+<br><br>
+
+<br> <br>
+<div class="row ">
+  <div class="table-responsive" >
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+  <thead>
+    <tr>
+      <th>Nom du projet</th>
+      <th>Direction régionale</th>
+      <th>Date de délibération </th>
+      <th>Fichier</th>
+  </tr>
+  </thead>
+  <tbody >
+    <tr class="non-vu" *ngFor="let del of deliberations ; let i = index ">
+      <td>{{del.nom_projet}}</td>
+      <td>{{del.direction_reg}}</td>
+      <td>{{del.deliberation.date}}</td>
+      <td><button type= "Primary" class= "btn btn-success" (click)=DownloadFile(del.deliberation.fichier)  ><i class="fas fa-file-download"></i> Télécharger le fichier</button></td>
+   
+    </tr>
+
+  </tbody>
+</table>
+ </div>
+
+    </div>
+
+  </div>
+</div>
+

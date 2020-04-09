@@ -1,0 +1,76 @@
+.colors span {
+    display: block;
+    float: left;
+    height: 6px;
+    width: 20%;
+    
+}
+
+.colors span:nth-child(1) {
+    background-color: #1c9ed9;
+}
+.colors span:nth-child(2) {
+    background-color: #ffd500;
+}
+.colors span:nth-child(3) {
+    background-color: #8bbe20;
+}
+.colors span:nth-child(4) {
+    background-color: #A70A2D;
+}
+.colors span:nth-child(5) {
+    background-color: #e62525;
+}
+
+.fond{
+    background-color: #FFFFFF;
+    font-size: 14px;
+    background-image: url(/assets/img/worldmap-aufusagers.png); 
+    background-repeat: no-repeat;
+    background-position: center top;
+    height:100vh;
+}
+
+.sign-box{
+    width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 183px;;
+    background-color: rgba(255,255,255);
+    padding: 20px;
+    box-shadow: 0px 3px 20px #DDD;
+}
+.input-sign{
+    width: 100%
+}
+.sign-box a{
+    font-size: 12px;
+}
+.divider {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.divider h2 {
+    display: table;
+    white-space: nowrap;
+    font-size: 1em;
+    font-weight: 700;
+}
+.divider h2::after, .divider h2::before {
+    border-top: 1px solid #B8B8B8;
+    content: '';
+    display: table-cell;
+    position: relative;
+    top: .7em;
+    width: 50%;
+}
+.divider h2::before {
+    right: 1.8%;
+}
+.divider h2::after {
+    left: 1.8%;
+}
+.footer-sign{
+    display: inline-block;
+    font-size: 12px;
+}

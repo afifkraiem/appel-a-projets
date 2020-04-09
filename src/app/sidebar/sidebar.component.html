@@ -1,0 +1,101 @@
+<!-- Sidebar -->
+
+<div id="wrapper" class="active">
+
+    <div id="sidebar-wrapper">
+        <div class="sidebar-header">
+        </div>
+        <ul class="sidebar-nav" id="sidebar" *ngIf= " userRole === 'CNEUF_ADMIN'">
+            <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="GestionUsers"><b>Gestion des utilisateurs</b><i class="icone fa fa-user-alt fa-2x"></i></a></li>
+            <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="Campagnes"><b>Gestion des campagnes</b><i class="icone fas fa-calendar-alt fa-2x"></i></a></li>
+            <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="Candidatures"><b>Gestion des candidatures</b> <i class="icone fas fa-clipboard-list fa-2x"></i></a></li>
+            <li><a> Gestion des évaluations<i class="icone fa fa-certificate fa-2x"></i></a>
+                <ul>
+                    <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="AffectationExpert"> <img src="./assets/img/arrow.svg" height="10px;">  Affectation des experts </a></li>
+                    <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="Evaluations"><img src="./assets/img/arrow.svg" height="10px;"> Evaluations </a></li>
+                </ul>
+            </li>
+            <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="Deliberations">Gestion des délibérations<i class="icone fa fa-clipboard-check fa-2x"></i></a></li>
+            <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="SuiviCneufs">Suivi des CNEUFS<i class="icone fa fa-clipboard-check fa-2x"></i></a></li>
+            <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="GestionActualites">Gestion des actualités<i class="icone fa fa-newspaper fa-2x"></i></a></li>
+            <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="dashboardAdmin">Tableau de bord<i class="icone fa fa-tachometer fa-2x"></i></a></li>
+
+
+        </ul>
+        <!--Expert-->
+    <ul class="sidebar-nav" id="sidebar" *ngIf= " userRole === 'CNEUF_EXPERT'" >
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="MonTableauDeBord" >Tableau de bord<i class="icone fa fa-tachometer-alt fa-2x"></i></a></li>
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="Soumission">Nouvelle candidature <i class="icone fa fa-plus-circle fa-2x"></i></a></li>
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="MesCandidatures">Mes candidatures<i class="icone fa fa-clipboard-list fa-2x"></i></a></li>
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink= "SuiviCneuf"  >Suivi de mes CNEUFs<i class="icone fa fa-chart-line fa-2x"></i></a></li>
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="MesActualites">Mes actualités<i class=" icone fa fa-newspaper fa-2x"></i></a></li>
+        
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="MesEvaluations">Candidatures à évaluer<i class="icone fa fa-certificate fa-2x"></i></a></li>
+        
+    </ul>
+    <!-- Coordonateur -->
+    <ul class="sidebar-nav" id="sidebar" *ngIf= " userRole === 'CNEUF_COORDONNATEUR'">
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="MonTableauDeBord">Tableau de bord<i class="icone fa fa-tachometer-alt fa-2x"></i></a></li>
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="Soumission">Nouvelle candidature <i class="icone fa fa-plus-circle fa-2x"></i></a></li>
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="MesCandidatures">Mes candidatures<i class="icone fa fa-clipboard-list fa-2x"></i></a></li>
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink= "SuiviCneuf" >Suivi de mes CNEUFs<i class="icone fa fa-chart-line fa-2x"></i></a></li>
+        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" routerLink="MesActualites">Mes actualités<i class=" icone fa fa-newspaper fa-2x"></i></a></li>
+    </ul>
+
+    
+
+    </div>
+
+
+<div class="container page-content-wrapper">
+<nav class="header-login row">
+    <div class="col-md-1 col-sm-1 col-xs-1 ">
+         <button  href="#" id="menu-toggle"><i class="fas fa-bars "></i></button>
+    </div>
+
+    <div class="col-md-3 col-sm-4 col-xs-4 hidden-xs">
+        <a routerLink = "../home">
+
+        <img src="../assets/img/CNEUF1.png" class="img-responsive logo">
+        </a>
+    </div>
+
+     <div  class="col-md-2  hidden-xs pull-right ">
+         <div class=" profil">
+        <ul>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <div class="userlogo">{{username}}</div> </a>
+                <ul class="dropdown-menu">
+                    <li><a href="https://test-usagers.auf.org"><i class="fas fa-user"> </i> Mon Profil</a></li>
+                    <li  > <a href="https://auth-b2c.auf.org/auth/?authorize&logout&client_id=11_56flyni8qug4s0sw04gkww8skskk8k444o44k4k0cg0cwsco4k&return_url=https%3A%2F%2Fcneuf.auf.org%2F%23%2F" (click)="logout()"><i class="fas fa-sign-out-alt"></i>  Se déconnecter</a> </li>
+                </ul>
+            </li>
+        </ul>
+
+
+         </div>
+
+    </div>
+
+    <div  class="visible-xs test cnx pull-right ">
+            <div class="row profil">
+                    <ul class=" pull-right">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <div class="userlogo">{{username}}</div> </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://test-usagers.auf.org"><i class="fas fa-user"> </i> Mon Profil</a></li>
+                                <li  > <a href="https://auth-b2c.auf.org/auth/?authorize&logout&client_id=11_56flyni8qug4s0sw04gkww8skskk8k444o44k4k0cg0cwsco4k&return_url=https%3A%2F%2Fcneuf.auf.org%2F%23%2F" (click)="logout()"><i class="fas fa-sign-out-alt"></i>  Se déconnecter</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+                     </div>
+
+    </div>
+
+</nav>
+<router-outlet></router-outlet>
+</div>
+
+</div>
